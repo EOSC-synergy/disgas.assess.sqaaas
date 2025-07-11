@@ -1,0 +1,42 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    gitlab.com/gmacedonio/disgas:
+      branch: master
+      repo: https://gitlab.com/gmacedonio/disgas
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      gitlab.com/gmacedonio/disgas git:
+        commands:
+        - /usr/bin/env sh .sqa/script.bluesy-salmon-moose.sh
+        container: qc.acc_bumpy-mauve-bordeaux
+  QC.Doc:
+    repos:
+      gitlab.com/gmacedonio/disgas find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.scaly-asparagus-gerbil.sh
+        container: qc.doc_geeky-smalt-insect
+      gitlab.com/gmacedonio/disgas git:
+        commands:
+        - /usr/bin/env sh .sqa/script.fuzzy-yellow-shrimp.sh
+        container: qc.doc_skinny-blue-chicken
+  QC.Lic:
+    repos:
+      gitlab.com/gmacedonio/disgas licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.flabby-chestnut-hamster.sh
+        container: qc.lic_cloudy-amaranth-uakari
+  QC.Ver:
+    repos:
+      gitlab.com/gmacedonio/disgas get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.wiggy-lavender-otter.sh
+        container: qc.ver_silly-periwinkle-hamster
+timeout: 5400
